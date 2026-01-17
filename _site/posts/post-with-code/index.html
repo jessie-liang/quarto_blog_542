@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jessie Liang">
+<meta name="dcterms.date" content="2026-01-16">
+
+<title>A Beginner’s Guide to Dashboards: Make Your Visuals Interactive – quarto_blog_542</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">quarto_blog_542</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">A Beginner’s Guide to Dashboards: Make Your Visuals Interactive</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">news</div>
+                <div class="quarto-category">code</div>
+                <div class="quarto-category">analysis</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Jessie Liang </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 16, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>As information technology is getting more advanced these years, big data is everywhere. Because of that, academic and business organizations are more aware of drawing insights from big bulk of data, hoping to get numerical evidence that aids decision making. However, after collecting massive data, an important question arises: how to get intuitions of this data set without applying complicated analysis? Some may say we can use summary tables that record key calculated statistics. Others would suggest draw a comprehensive fixed graph that is ready to use in reports or slides. Although these options make sense and are widely used, they actually miss one important aspect: interactivity. Why does interaction matter? Well, the explorer of this data set may want to see the data from different angles. By only using tables or fixed charts, a data analyst is needed to constantly update the table or generate a new plot to meet the new ideas of the data explorer, which is very slow, inconvenient, and repetitive.</p>
+<p>In this situation where the data explorer wants to peek the data from different perspectives himself/herself, dashboards come as a rescue. With dashboards, the data explorer is no longer a passive viewer of static outputs. Instead, he/she can interact with the raw data by doing simple manipulations such as filtering and selecting. If you are a beginner to dashboard, then this blog is just for you. Here we will briefly discuss the definition, mechanism, motivation and power of dashboards. As a practical guideline, this blog mainly focuses on two aspects in detail: interactive elements and visual types, including what they are and how to use them.</p>
+<section id="introduction-to-dashboards" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-dashboards">Introduction to Dashboards</h2>
+<p>A dashboard is an interactive visual tool that allows users to discover patterns from the raw data in a self-driven way. Unlike static ones, dashboards can receive, process, and respond to user inputs. Whenever a response is received from an interactive element, such as answering a multiple choice question, the visuals will be updated automatically to align with the user inputs, without manual efforts. Sounds cool? Yes it is!</p>
+<p>Roughly speaking, there are two basic yet important parts of dashboards:</p>
+<ol type="1">
+<li><p>Interactive elements: These are user-facing “interface” that allow users to input their choices, thus controlling what data is used to generate results behind the scenes.</p></li>
+<li><p>Visual types: These are the final products delivered to users, which typically include plots and/or tables which are dynamic and responsive to user inputs.</p></li>
+</ol>
+<p>These two parts work in tandem, with one collecting users’ intentions and the other showing results accordingly. As a concrete example, a dashboard has a slider that asks you to select the start and end year of the analysis period. With these years given, the dashboard then automatically generates a line chart showing the trend of sales between the given start and end year. This is the strength of using a dashboard: now we do not need to email a data analyst back and forth to ask for many different line charts with different start and end years. Rather, we can do all of this ourselves!</p>
+</section>
+<section id="commonly-used-interactive-elements" class="level2">
+<h2 class="anchored" data-anchor-id="commonly-used-interactive-elements">Commonly used Interactive Elements</h2>
+<p>The unique component that distinguishes dashboards from static visuals is the interactive element. In fact, interactive elements enable users to control the dashboard. Based on user inputs, the dashboard then decides the underlying data to display, such as what subset of data should be included in plotting.</p>
+<p>Here in this blog, I will introduce 4 frequently used interactive elements, which are also my favorites:</p>
+<section id="drop-down-menu" class="level3">
+<h3 class="anchored" data-anchor-id="drop-down-menu">1. Drop-down Menu</h3>
+<p>A drop-down menu is a collection of all possible choices at which users can click to select. Depending on the setting of the dashboard, users may be allowed to select only one value, or sometimes multiple selections are permitted.</p>
+<p><strong>Use cases of drop-down menu</strong>:</p>
+<ul>
+<li><p>Choose a continent</p></li>
+<li><p>Select departments of a company</p></li>
+<li><p>Pick a year to analyze the sales data</p></li>
+</ul>
+<p><strong>Dos and Don’ts</strong>:</p>
+<ul>
+<li><p>Don’t use a drop-down menu when there are too many choices to select from</p></li>
+<li><p>Do use a drop-down menu when the options are discrete (and Don’t use it when the options are continuous)</p></li>
+</ul>
+<p>Drop-down menus are simple and intuitive to use. Since they seem familiar to many users, they are one of the most common choices used in dashboards.</p>
+</section>
+<section id="slider" class="level3">
+<h3 class="anchored" data-anchor-id="slider">2. Slider</h3>
+<p>A slider is a bar of values with a constant step size that shows a predefined range of numbers. Depending on the setting of the dashboard, users may pick a single value or a range of values from the slider by dragging the handle along the bar.</p>
+<p><strong>Use cases of sliders</strong>:</p>
+<ul>
+<li><p>Select the range of the sales period</p></li>
+<li><p>Pick a price interval and analyze the categories of goods with these prices</p></li>
+</ul>
+<p><strong>Dos and Don’ts</strong>:</p>
+<ul>
+<li><p>Do set a reasonable step size, so that the consecutive values are not too close or too far away when compared to the length of the bar,</p></li>
+<li><p>Don’t use slider for the data that cannot be ordered, since we should be able to compare and order different values.</p></li>
+</ul>
+<p>Sliders are handy for understanding patterns over time or across a range of values of some data. They are also easy to use and implement.</p>
+</section>
+<section id="hover-data" class="level3">
+<h3 class="anchored" data-anchor-id="hover-data">3. Hover Data</h3>
+<p>Hover data shows additional details of the hovered point or region in a plot. What extra information is included in the pop-up text box can be controlled by the dashboard design.</p>
+<p><strong>Use cases of hover data</strong>:</p>
+<ul>
+<li><p>Show the world rank of the country’s consumption when hovering mouse over this country on the map</p></li>
+<li><p>Show the exact numeric value of a line chart when hovering mouse over a point on the line</p></li>
+</ul>
+<p><strong>Dos and Don’ts</strong>:</p>
+<ul>
+<li><p>Do use hover data to avoid overcrowding information in the plot</p></li>
+<li><p>Do use hover data to show additional useful details that cannot be listed out explicitly</p></li>
+</ul>
+</section>
+<section id="cross-filtering" class="level3">
+<h3 class="anchored" data-anchor-id="cross-filtering">4. Cross-Filtering</h3>
+<p>Cross-filtering links different plots together. With cross-filtering, other plots will be adjusted automatically based on the user interactions with one particular plot.</p>
+<p><strong>Use cases of cross-filtering</strong>:</p>
+<ul>
+<li><p>Clicking Canada on the map updates another line chart to show only Canadian data.</p></li>
+<li><p>Hovering mouse in a line chart on a particular year updates another bar chart to include only the data of that selected year.</p></li>
+</ul>
+<p>Cross-filtering is an advanced and powerful technique. Because of it, dashboards become coordinated entities instead of unrelated and independent pieces.</p>
+</section>
+</section>
+<section id="visual-types" class="level2">
+<h2 class="anchored" data-anchor-id="visual-types">Visual Types</h2>
+<p>Though dashboards have additional functions than static visuals, they are actually built upon static plots. After integrating interactive elements, dashboards still need static plots as carriers to convey graphical information. In this blog, I will talk about 4 basic yet useful types of plots:</p>
+<section id="maps" class="level3">
+<h3 class="anchored" data-anchor-id="maps">1. Maps</h3>
+<p>Maps show the variation and/or distribution of data across different geographic locations. They are often used when regional patterns matter and location is a major variable to consider.</p>
+<p><strong>Use cases of maps</strong>:</p>
+<ul>
+<li><p>Population of countries colored by value</p></li>
+<li><p>Total sales by province with numbers as labels on top of each province</p></li>
+</ul>
+<p>As mentioned above, labels and/or color intensity are usually adopted to represent numeric values.</p>
+</section>
+<section id="line-charts" class="level3">
+<h3 class="anchored" data-anchor-id="line-charts">2. Line Charts</h3>
+<p>Line charts are the most ideal candidate to plot the trend of a numeric variable over time.</p>
+<p><strong>Use cases of line charts</strong>:</p>
+<ul>
+<li><p>How did the CPI index change over the past 10 years?</p></li>
+<li><p>Did monthly sales generally increase or decrease in the past year?</p></li>
+</ul>
+<p>Line charts can have only one line in the plot or several lines colored by another categorical variable which facilitates comparison.</p>
+</section>
+<section id="bar-charts" class="level3">
+<h3 class="anchored" data-anchor-id="bar-charts">3. Bar Charts</h3>
+<p>Bar charts are suitable to compare numerical values across different levels of a categorical variable. Since human eyes are good at comparing length of bars with the same starting position, bar charts are perfect for comparing the magnitude of numerical values.</p>
+<p><strong>Use cases of bar charts</strong>:</p>
+<ul>
+<li><p>Top 5 countries with largest population in Asia</p></li>
+<li><p>Number of students by department</p></li>
+</ul>
+<p>But note that bar charts are only informative given the number of categories is restricted. With too many categories, the plot becomes messy.</p>
+</section>
+<section id="stacked-area-chart" class="level3">
+<h3 class="anchored" data-anchor-id="stacked-area-chart">4. Stacked Area Chart</h3>
+<p>Stacked area charts demonstrate what percentage each category accounts for when compared to the total. In particular, they are useful when you are interested in how each component contributes to the total. Another caveat is that stacked area chart is only intuitive when the number of categories is small enough.</p>
+<p>Nevertheless, there are also obvious drawbacks for this type of plot: It is hard to compare the exact value of individual portions, since their starting positions are different. In other words, if precise comparison is the goal, then stacked area chart should not be used and you might proceed with bar charts.</p>
+<p>Therefore, this type of visualization is sometimes controversial and should be used with care.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
